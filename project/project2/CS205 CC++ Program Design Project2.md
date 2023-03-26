@@ -233,7 +233,7 @@ double dotProduct(Data * vector1, byte * v1Type, Data * vector2, byte *v2Type, i
 | 180000000     | 2896.666667 | 2901        | 2891.666667 | 2891.666667 | 2858.666667 | 2891.666667 | 228.6074074 |
 | 200000000     | 3197        | 3208        | 3200.666667 | 3217        | 3212.333333 | 3209.333333 | 54.81851852 |
 
-<img src="CS205 CC++ Program Design Project2.assets/java_diff_data_type.png" alt="java_diff_data_type" style="zoom:35%;" /><img src="CS205 CC++ Program Design Project2.assets/cpp_diff_data_type.png" alt="cpp_diff_data_type" style="zoom:35%;" />
+![java_diff_data_type](https://user-images.githubusercontent.com/83866527/227753667-63cfce9c-1e46-438c-b6f8-1546417e7105.png)![cpp_diff_data_type](https://user-images.githubusercontent.com/83866527/227753680-d17058ab-0ee4-46d3-9907-6b062a68541d.png)
 
 从方差可以看出对于java语言，不同数据类型在数据量小的时候运算开销基本相同，但随着数据量增大方差也增大。增大一方面是因为数据值变大，浮动自然变大，但通过曲线图可以看出各类型确实存在偏差，表现为double > float > long > mix > short ≈ int。其中我将short保存为int，所以两者相近很正常，long是64位比int32位慢也可以理解，但是据我所知在现在64位系统下，long并不一定比int慢，还需要看操作系统和编译器。至于double > float也是一样的道理，且现在有浮点数专门的ALU，所以浮点数的快慢也不能仅凭位数决定。但一般浮点数>整型数(浮点数储存形式更复杂，涉及到指数位的进退，位运算更复杂)。
 
@@ -243,7 +243,7 @@ double dotProduct(Data * vector1, byte * v1Type, Data * vector2, byte *v2Type, i
 
 #### 实验2：不同语言对点乘效率的影响
 
-![java_and_cpp](CS205 CC++ Program Design Project2.assets/java_and_cpp.png)
+![java_and_cpp](https://user-images.githubusercontent.com/83866527/227753651-dbcfc4f3-db25-4aab-a506-b185491d047d.png)
 
 cpp选取最接近平均值的mix线与java的运算效率进行对比，可以很明显看出cpp的运行时间远大于java运行时间。就直观感受来说，这是不合理的因为cpp的运行时间一般都是远快于java程序的。但经过调研，我发现问题出在JIT(Just in Time)编译器上，JIT又称为即使热点引擎，它会在执行代码的时候让JVM记住被反复使用的机器码代码段，在后续调用中可以快速重用。也因此这可以看成是java编译器的动态优化特性，使得它的运行效果反超cpp。
 
@@ -281,7 +281,7 @@ cpp选取最接近平均值的mix线与java的运算效率进行对比，可以�
 | 180000000    | 17243.33333 | 17198.66667 | 17131.66667 | 17197.33333 | 17225.66667 | 17245.66667 | 1800.32963  |
 | 200000000    | 19100.33333 | 19112.66667 | 18940       | 19101       | 19099.66667 | 18999       | 5153.407407 |
 
-![generating_time](CS205 CC++ Program Design Project2.assets/generating_time.png)
+![generating_time](https://user-images.githubusercontent.com/83866527/227753643-d5aff829-458a-4c4d-ba8e-9b9145a04507.png)
 
 通过图可以看到，在java，不同数据类型生成的效率有着天差地别，浮点数的生成要远慢于整型数，而高位数据也慢于低位数据。这是因为Java中的随机数生成器使用的是伪随机数算法，它依赖于一个称为“种子”的值。种子是一个整数，用于生成整数随机数，但是它不能用于生成浮点数随机数。因此，生成浮点数随机数的过程要比生成整数随机数稍微复杂一些，因此效率会慢一些。而C++中的随机数生成器使用的是一种称为伪随机数生成器（PRNG）的技术，它使用一个称为种子的初始值来生成一系列的数字。这些数字都是伪随机的，因为它们是由一个固定的算法生成的，所以它们的效率是相同的，无论是浮点数还是整型数。
 
@@ -296,4 +296,4 @@ cpp选取最接近平均值的mix线与java的运算效率进行对比，可以�
 在完成课程项目中，我也遇见许多困难，它们同样给予了我启发。在设计代码时，我希望程序能够自己选择合适的数据类型保存。因为我知道“=”右边是先根据自己的数据类型运算再赋值给左边的变量(测试混合数据类型向量的速度时有用)。为此我想到了Vector类，然后我失败了。首先Vector类并不比ArrayList之类的方便，性能也差很多，而且不指定类型在相加时还是需要自己判断然后强转。总之在性能和书写难度方面都很糟糕，最后还是回归数组(快且方便)。这也让我明白，代码不应该过度追求完备性与复杂性，有时候简单而重复的数据结构反而显得更优雅、更效率、更好理解。同时在思考数据类型对效率的影响时，我查阅了很多资料，这让我对基本数据类型有着更深的理解，明白不是数据越小就越快，数据越大就越全面。结合实验结果，我发现最终数据类型的选择还是需要根据实际情况来，在内存与效率间寻找平衡点。
 
 ## VI. 源码
-
+https://github.com/15775011722/CS205-Sustech-Cpp/tree/main/project/project2
