@@ -16,7 +16,8 @@ $$
 $$
 然而数学中的卷积和卷积神经网络中的卷积严格意义上是两种不同的运算。数学中卷积，主要是为了诸如信号处理、求两个随机变量和的分布等而定义的运算，所以需要根据问题的需求而确定是否”翻转”。自然运算方式是卷积核与原始的矩阵乘积，需要围绕着中心元素进行180度旋转后才是对应的元素。而卷积神经网络中“卷积”，是为了提取图像的特征，其实只借鉴了“加权求和”的特点，同时卷积核参数本身就是trainable的参数，可以人为设置也可以根据数据训练学习，那么不翻转也不会有问题。
 
-<img src="CS205 CC++ Program Design Project3.assets/image-20230420203727103.png" alt="image-20230420203727103" style="zoom:33%;" />
+![image-20230420203727103](https://user-images.githubusercontent.com/83866527/233762058-882a91b8-4568-4028-bca0-7a9e6ede0482.png)
+
 $$
 计算机中的卷积： g(x,y)=w(x,y)∗f(x,y)=Σ_{s=-K/2}^{K/2}Σ_{t=-K/2}^{K/2}w(s,t)f(x−s,y−t)
 $$
@@ -42,7 +43,7 @@ IDE：VScode-x64-1.75.1
 
 输出矩阵：[o_n, o_c, o_w, o_h] (o_n=i_n, o_c=k_n, o_w=i_w-k_w+1,o_h=i_h-k_h+1)
 
-![](CS205 CC++ Program Design Project3.assets/数据结构.png)
+![数据结构](https://user-images.githubusercontent.com/83866527/233762073-0d8e5719-b568-4f3b-a75a-48d1c625bc5f.png)
 
 (图片取自：https://blog.csdn.net/weixin_44064434/article/details/123647168)
 
@@ -149,7 +150,7 @@ kernel[1,1,3,3]={1,2,1,0,0,0,-1,-2,-1}
 
 输出：outputs[1,1,3,3]={-13,-20,-17,-18,-24,-18,13,20,17}
 
-<img src="CS205 CC++ Program Design Project3.assets/image-20230421000703837.png" alt="image-20230421000703837" style="zoom: 33%;" />
+![image-20230421000703837](https://user-images.githubusercontent.com/83866527/233762101-ecafe7e4-f06b-4a8f-b80f-4b81b8997395.png)
 
 #### 效率分析
 
@@ -244,4 +245,4 @@ O3：在O2的基础上进行更多的优化，例如使用伪寄存器网络，�
 本次项目，我了解了卷积的原理和实现，并充分思考了代码的优化方案，从中收获了很多。对于代码优化，可以进行逻辑上的优化(比如修改循环顺序使得CPU的MMU hit率上升)、资源利用上的优化(如并行)或者硬件上的优化(如程序预热)。但所有的优化都是基于**对代码以及对计算机的理解**，盲目进行优化反而会导致效率降低以及答案错误。同时这也告诉我一个代码思路，就是在设计时就尽可能往优化方向靠拢，设计更能被优化的程序。编程学习博大精深，知识互相关联又互不相同，共同组成计算机科学大厦。今后我会更加勤勉学习。
 
 ## VI. 源码
-
+https://github.com/15775011722/CS205-Sustech-Cpp/blob/main/project/project3/CS205%20CC%2B%2B%20Program%20Design%20Project3.md
